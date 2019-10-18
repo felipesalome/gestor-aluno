@@ -110,6 +110,27 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return alunoList;
     }
     
+    @Override
+    public int buscarCodigo() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT MAX(codigo) FROM aluno";
+        int codigo = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                codigo = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return codigo;
+    }
+    
     private List listarCursoPorAluno(Connection conn, int codigo) {
         String sql =
                 "SELECT c.* " +

@@ -78,6 +78,6 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" + "codigo=" + codigo + ", descricao=" + descricao + ", ementa=" + ementa + ", aluno=" + aluno + '}';
+        return "Curso{" + descricao + ", " + ementa + '}';
     }
 }
