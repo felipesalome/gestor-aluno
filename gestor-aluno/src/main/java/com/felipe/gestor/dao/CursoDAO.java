@@ -115,9 +115,9 @@ public class CursoDAO implements DataAccessObject<Curso> {
     private List listarAlunosPorCurso(Connection conn, int codigo) {
         String sql =
                 "SELECT a.* " +
-                "FROM aluno a, aluno_curso ac " +
-                "WHERE ac.codigo_aluno = ? " +
-                "AND ac.codigo_curso = a.codigo";
+                "FROM aluno a, curso_aluno ca " +
+                "WHERE ca.codigo_curso = ? " +
+                "AND ca.codigo_aluno = a.codigo";
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List alunoList = new ArrayList();

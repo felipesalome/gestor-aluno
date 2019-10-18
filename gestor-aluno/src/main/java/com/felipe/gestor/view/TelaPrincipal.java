@@ -45,6 +45,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonCurso.setText("Curso");
+        jButtonCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
@@ -53,16 +58,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addComponent(jButtonCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jButtonAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMenuLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jButtonAluno)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCurso)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -103,6 +108,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaAluno telaAluno = new TelaAluno();
         telaAluno.setVisible(true);
     }//GEN-LAST:event_jButtonAlunoActionPerformed
+
+    private void jButtonCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoActionPerformed
+        TelaCurso telaCurso = new TelaCurso();
+        telaCurso.setVisible(true);
+    }//GEN-LAST:event_jButtonCursoActionPerformed
 
     /**
      * @param args the command line arguments

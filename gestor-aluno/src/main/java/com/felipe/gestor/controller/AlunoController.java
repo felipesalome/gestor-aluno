@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class AlunoController implements IAlunoController{
     
     private JTable jTableAlunos;
+    
+    public AlunoController() {}
 
     public AlunoController(JTable jTableAlunos) {
         this.jTableAlunos = jTableAlunos;
@@ -42,4 +44,9 @@ public class AlunoController implements IAlunoController{
         }
     }
     
+    public void cadastrarAluno(Aluno aluno) {
+        AlunoDAO cadAluno = new AlunoDAO();
+        cadAluno.salvar(aluno);
+        tabelaAluno();
+    }
 }

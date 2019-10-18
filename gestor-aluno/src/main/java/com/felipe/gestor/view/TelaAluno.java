@@ -6,6 +6,10 @@
 package com.felipe.gestor.view;
 
 import com.felipe.gestor.controller.AlunoController;
+import com.felipe.gestor.model.Aluno;
+import com.felipe.gestor.model.Curso;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,6 +17,8 @@ import com.felipe.gestor.controller.AlunoController;
  */
 public class TelaAluno extends javax.swing.JFrame {
 
+    AlunoController aController;
+    
     /**
      * Creates new form TelaAluno
      */
@@ -36,9 +42,9 @@ public class TelaAluno extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanelFormularioAluno = new javax.swing.JPanel();
         jLabelNome = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldAlunoNome = new javax.swing.JTextField();
         jLabelCurso = new javax.swing.JLabel();
-        jTextFieldCurso = new javax.swing.JTextField();
+        jTextFieldCursoDescricao = new javax.swing.JTextField();
         jButtonAlunoSalvar = new javax.swing.JButton();
         jButtonAlunoEditar = new javax.swing.JButton();
         jButtonAlunoApagar = new javax.swing.JButton();
@@ -76,7 +82,7 @@ public class TelaAluno extends javax.swing.JFrame {
         if (jTableAlunos.getColumnModel().getColumnCount() > 0) {
             jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
-        AlunoController aController = new AlunoController(jTableAlunos);
+        aController = new AlunoController(jTableAlunos);
         aController.tabelaAluno();
 
         jLabelNomeTela.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -87,15 +93,20 @@ public class TelaAluno extends javax.swing.JFrame {
         jLabelNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabelNome.setText("Nome");
 
-        jTextFieldNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextFieldAlunoNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabelCurso.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabelCurso.setText("Curso");
 
-        jTextFieldCurso.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextFieldCursoDescricao.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jButtonAlunoSalvar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonAlunoSalvar.setText("Salvar");
+        jButtonAlunoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlunoSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFormularioAlunoLayout = new javax.swing.GroupLayout(jPanelFormularioAluno);
         jPanelFormularioAluno.setLayout(jPanelFormularioAlunoLayout);
@@ -105,9 +116,9 @@ public class TelaAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome)
+                    .addComponent(jTextFieldAlunoNome)
                     .addComponent(jLabelCurso)
-                    .addComponent(jTextFieldCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jButtonAlunoSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -117,11 +128,11 @@ public class TelaAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelCurso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAlunoSalvar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -187,6 +198,19 @@ public class TelaAluno extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonAlunoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoSalvarActionPerformed
+        Aluno aluno = new Aluno();
+        aluno.setNome(jTextFieldAlunoNome.getText());
+        List curso = new ArrayList();
+        if (!jTextFieldCursoDescricao.getText().trim().isEmpty()) {
+            curso.add("descricao=" + jTextFieldCursoDescricao.getText());
+        }
+        aluno.setCurso(curso);
+        aController.cadastrarAluno(aluno);
+        aController = new AlunoController(jTableAlunos);
+        aController.tabelaAluno();
+    }//GEN-LAST:event_jButtonAlunoSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,7 +258,7 @@ public class TelaAluno extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableAlunos;
-    private javax.swing.JTextField jTextFieldCurso;
-    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldAlunoNome;
+    private javax.swing.JTextField jTextFieldCursoDescricao;
     // End of variables declaration//GEN-END:variables
 }
