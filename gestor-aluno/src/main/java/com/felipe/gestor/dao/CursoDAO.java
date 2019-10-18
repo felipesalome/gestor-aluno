@@ -225,5 +225,26 @@ public class CursoDAO implements DataAccessObject<Curso> {
         }
         return cursoList;
     }
+
+    @Override
+    public int buscarCodigo() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT MAX(codigo) FROM curso";
+        int codigo = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                codigo = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return codigo;
+    }
     
 }
