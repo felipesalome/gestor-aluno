@@ -6,6 +6,7 @@
 package com.felipe.gestor.dao;
 
 import com.felipe.gestor.model.Aluno;
+import com.felipe.gestor.model.Curso;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -98,6 +99,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
                 aluno = new Aluno();
                 aluno.setCodigo(rs.getInt("codigo"));
                 aluno.setNome(rs.getString("nome"));
+                aluno.setCurso(listarCursoPorAluno(conn, aluno.getCodigo()));
                 alunoList.add(aluno);
             }
         } catch (SQLException e) {
@@ -106,6 +108,33 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
             Conexao.close(conn, pstm, rs);
         }
         return alunoList;
+    }
+    
+    private List listarCursoPorAluno(Connection conn, int codigo) {
+        String sql =
+                "SELECT c.* " +
+                "FROM curso c, aluno_curso ac " +
+                "WHERE ac.codigo_aluno = ? " +
+                "AND ac.codigo_curso = c.codigo";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List cursoList = new ArrayList();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, codigo);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Curso curso = new Curso();
+                curso.setCodigo(rs.getInt("codigo"));
+                curso.setDescricao(rs.getString("descricao"));
+                cursoList.add(curso);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(null, pstm, rs);
+        }
+        return cursoList;
     }
     
     public List buscarAluno(int codigo) {
