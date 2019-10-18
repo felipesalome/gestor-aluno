@@ -13,6 +13,7 @@ import com.felipe.gestor.controller.CursoController;
  */
 public class TelaCurso extends javax.swing.JFrame {
 
+    CursoController cController;
     /**
      * Creates new form TelaCurso
      */
@@ -61,6 +62,11 @@ public class TelaCurso extends javax.swing.JFrame {
         jLabel1.setText("Aluno");
 
         jButtonCursoSalvar.setText("Salvar");
+        jButtonCursoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCursoSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFormularioCursoLayout = new javax.swing.GroupLayout(jPanelFormularioCurso);
         jPanelFormularioCurso.setLayout(jPanelFormularioCursoLayout);
@@ -130,15 +136,30 @@ public class TelaCurso extends javax.swing.JFrame {
             }
         });
         jTableCursos.getTableHeader().setReorderingAllowed(false);
+        jTableCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCursosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableCursos);
-        CursoController cController = new CursoController(jTableCursos);
+        cController = new CursoController(jTableCursos);
         cController.tabelaCurso();
 
         jButtonCursoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonCursoEditar.setText("Editar");
+        jButtonCursoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCursoEditarActionPerformed(evt);
+            }
+        });
 
         jButtonCursoApagar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonCursoApagar.setText("Apagar");
+        jButtonCursoApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCursoApagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCursoConteudoLayout = new javax.swing.GroupLayout(jPanelCursoConteudo);
         jPanelCursoConteudo.setLayout(jPanelCursoConteudoLayout);
@@ -190,6 +211,62 @@ public class TelaCurso extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCursoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoSalvarActionPerformed
+        cController = new CursoController(jTableCursos);
+       
+        String descricao = jTextFieldCursoDescricao.getText();
+        String ementa = jTextAreaCursoEmenta.getText();
+        String nome = jTextFieldAlunoNome.getText();
+        
+        cController.salvar(descricao, ementa, nome);
+        
+        jTextFieldCursoDescricao.setText("");
+        jTextAreaCursoEmenta.setText("");
+        jTextFieldAlunoNome.setText("");
+        
+        cController.tabelaCurso();
+    }//GEN-LAST:event_jButtonCursoSalvarActionPerformed
+
+    private void jTableCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCursosMouseClicked
+        if (jTableCursos.getSelectedRow() != -1){
+            
+            jTextFieldCursoDescricao.setText(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 1).toString());
+            jTextAreaCursoEmenta.setText((String) jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 2));
+            jTextFieldAlunoNome.setText(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 3).toString());
+        }
+    }//GEN-LAST:event_jTableCursosMouseClicked
+
+    private void jButtonCursoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoEditarActionPerformed
+        cController = new CursoController(jTableCursos);
+       
+        int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
+        String descricao = jTextFieldCursoDescricao.getText();
+        String ementa = jTextAreaCursoEmenta.getText();
+        String nome = jTextFieldAlunoNome.getText();
+        
+        cController.editar(codigo, descricao, ementa, nome);
+        
+        jTextFieldCursoDescricao.setText("");
+        jTextAreaCursoEmenta.setText("");
+        jTextFieldAlunoNome.setText("");
+        
+        cController.tabelaCurso();
+    }//GEN-LAST:event_jButtonCursoEditarActionPerformed
+
+    private void jButtonCursoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoApagarActionPerformed
+        cController = new CursoController(jTableCursos);
+       
+        int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
+        
+        cController.apagar(codigo);
+        
+        jTextFieldCursoDescricao.setText("");
+        jTextAreaCursoEmenta.setText("");
+        jTextFieldAlunoNome.setText("");
+        
+        cController.tabelaCurso();
+    }//GEN-LAST:event_jButtonCursoApagarActionPerformed
 
     /**
      * @param args the command line arguments

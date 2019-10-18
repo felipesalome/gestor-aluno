@@ -6,6 +6,7 @@
 package com.felipe.gestor.view;
 
 import com.felipe.gestor.controller.AlunoController;
+import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import java.util.ArrayList;
@@ -78,6 +79,11 @@ public class TelaAluno extends javax.swing.JFrame {
             }
         });
         jTableAlunos.getTableHeader().setReorderingAllowed(false);
+        jTableAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAlunosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableAlunos);
         if (jTableAlunos.getColumnModel().getColumnCount() > 0) {
             jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(15);
@@ -140,9 +146,19 @@ public class TelaAluno extends javax.swing.JFrame {
 
         jButtonAlunoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonAlunoEditar.setText("Editar");
+        jButtonAlunoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlunoEditarActionPerformed(evt);
+            }
+        });
 
         jButtonAlunoApagar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonAlunoApagar.setText("Apagar");
+        jButtonAlunoApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlunoApagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelConteudoLayout = new javax.swing.GroupLayout(jPanelConteudo);
         jPanelConteudo.setLayout(jPanelConteudoLayout);
@@ -199,17 +215,55 @@ public class TelaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlunoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoSalvarActionPerformed
-        Aluno aluno = new Aluno();
-        aluno.setNome(jTextFieldAlunoNome.getText());
-        List curso = new ArrayList();
-        if (!jTextFieldCursoDescricao.getText().trim().isEmpty()) {
-            curso.add("descricao=" + jTextFieldCursoDescricao.getText());
-        }
-        aluno.setCurso(curso);
-        aController.cadastrarAluno(aluno);
         aController = new AlunoController(jTableAlunos);
+       
+        String nomeAluno = jTextFieldAlunoNome.getText();
+        String curso = jTextFieldCursoDescricao.getText();
+        
+        aController.salvar(nomeAluno, curso);
+        
+        jTextFieldAlunoNome.setText("");
+        jTextFieldCursoDescricao.setText("");
+        
         aController.tabelaAluno();
     }//GEN-LAST:event_jButtonAlunoSalvarActionPerformed
+
+    private void jTableAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlunosMouseClicked
+        
+        if (jTableAlunos.getSelectedRow() != -1){
+            
+            jTextFieldAlunoNome.setText(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 1).toString());
+            jTextFieldCursoDescricao.setText(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 2).toString());
+        }
+    }//GEN-LAST:event_jTableAlunosMouseClicked
+
+    private void jButtonAlunoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoEditarActionPerformed
+        aController = new AlunoController(jTableAlunos);
+       
+        int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
+        String nomeAluno = jTextFieldAlunoNome.getText();
+        String curso = jTextFieldCursoDescricao.getText();
+        
+        aController.editar(codigo, nomeAluno, curso);
+        
+        jTextFieldAlunoNome.setText("");
+        jTextFieldCursoDescricao.setText("");
+        
+        aController.tabelaAluno();
+    }//GEN-LAST:event_jButtonAlunoEditarActionPerformed
+
+    private void jButtonAlunoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoApagarActionPerformed
+        aController = new AlunoController(jTableAlunos);
+       
+        int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
+        
+        aController.apagar(codigo);
+        
+        jTextFieldAlunoNome.setText("");
+        jTextFieldCursoDescricao.setText("");
+        
+        aController.tabelaAluno();
+    }//GEN-LAST:event_jButtonAlunoApagarActionPerformed
 
     /**
      * @param args the command line arguments
