@@ -6,7 +6,11 @@
 package com.felipe.gestor.controller;
 
 import com.felipe.gestor.dao.AlunoDAO;
+import com.felipe.gestor.dao.CursoAlunoDAO;
+import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
+import com.felipe.gestor.model.Curso;
+import com.felipe.gestor.model.CursoAluno;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -44,9 +48,50 @@ public class AlunoController implements IAlunoController{
         }
     }
     
-    public void cadastrarAluno(Aluno aluno) {
-        AlunoDAO cadAluno = new AlunoDAO();
-        cadAluno.salvar(aluno);
-        tabelaAluno();
+    public void salvar(String nome, String descricao) {
+        if (!nome.isEmpty()) {
+            Aluno aluno = new Aluno();
+            aluno.setNome(nome);
+            new AlunoDAO().salvar(aluno);
+            int codAluno = new AlunoDAO().buscarCodigo();
+            if (!descricao.isEmpty()) {
+                Curso curso = new Curso();
+                curso.setDescricao(descricao);
+                new CursoDAO().salvar(curso);
+                int codCurso = new CursoDAO().buscarCodigo();
+                CursoAluno cursoAluno = new CursoAluno();
+                cursoAluno.setCodigoAluno(codAluno);
+                cursoAluno.setCodigoCurso(codCurso);
+                new CursoAlunoDAO().salvar(cursoAluno);
+            }
+        }
+    }
+    
+    public void editar(int codigo, String nome, String descricao) {
+        if (!nome.isEmpty()) {
+            Aluno aluno = new Aluno();
+            aluno.setCodigo(codigo);
+            aluno.setNome(nome);
+            new AlunoDAO().editar(aluno);
+            int codAluno = new AlunoDAO().buscarCodigo();
+            if (!descricao.isEmpty()) {
+                Curso curso = new Curso();
+                curso.setDescricao(descricao);
+                new CursoDAO().salvar(curso);
+                int codCurso = new CursoDAO().buscarCodigo();
+                CursoAluno cursoAluno = new CursoAluno();
+                cursoAluno.setCodigoAluno(codAluno);
+                cursoAluno.setCodigoCurso(codCurso);
+                new CursoAlunoDAO().salvar(cursoAluno);
+            }
+        }
+    }
+    
+    public void apagar(int codigo) {
+        if (codigo != 0) {
+            Aluno aluno = new Aluno();
+            aluno.setCodigo(codigo);
+            new AlunoDAO().apagar(aluno);
+        }
     }
 }
