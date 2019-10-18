@@ -5,6 +5,9 @@
  */
 package com.felipe.gestor.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author felipe
@@ -13,6 +16,8 @@ public class Curso {
     private int codigo;
     private String descricao;
     private String ementa;
+    
+    private List aluno = new ArrayList();
     
     public Curso() {}
     
@@ -63,11 +68,16 @@ public class Curso {
         this.ementa = ementa;
     }
 
+    public List getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(List aluno) {
+        this.aluno = aluno;
+    }
+
     @Override
     public String toString() {
-        return "Curso{" + "codigo=" + codigo + ", descricao=" + descricao + ", ementa=" + ementa + '}';
+        return "Curso{" + "codigo=" + codigo + ", descricao=" + descricao + ", ementa=" + ementa + ", aluno=" + aluno + '}';
     }
-    
-    
-    
 }
