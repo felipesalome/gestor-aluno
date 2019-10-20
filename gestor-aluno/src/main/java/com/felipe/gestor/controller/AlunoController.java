@@ -5,6 +5,7 @@
  */
 package com.felipe.gestor.controller;
 
+import com.felipe.gestor.controller.helper.AlunoHelper;
 import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.dao.CursoAlunoDAO;
 import com.felipe.gestor.dao.CursoDAO;
@@ -13,8 +14,6 @@ import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
 import java.util.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,48 +22,44 @@ import javax.swing.table.DefaultTableModel;
 public class AlunoController {
     
     private final TelaAluno view;
+    private final AlunoHelper helper;
     
     public AlunoController(TelaAluno view) {
         this.view = view;
+        this.helper = new AlunoHelper(view);
     }
 
-    public void tabelaAluno(JTable jTableAlunos) {
-        if (jTableAlunos != null) {
-            DefaultTableModel modelo = (DefaultTableModel) jTableAlunos.getModel();
-            if (modelo.getRowCount() > 0) {
-                modelo.setRowCount(0);
-            }
-            AlunoDAO aluno = new AlunoDAO();
-            List<Aluno> listAluno = aluno.buscarTodos();
-            listAluno.stream().map((a) -> {
-                Object[] linha = new Object[3];
-                linha[0] = a.getCodigo();
-                linha[1] = a.getNome();
-                linha[2] = a.getCurso();
-                return linha;
-            }).forEachOrdered((linha) -> {
-                modelo.addRow(linha);
-            });
-        }
+    public void tabelaAluno() {
+        // Pegar as informações no banco de dados
+        AlunoDAO alunoDAO = new AlunoDAO();
+        List<Aluno> alunos = alunoDAO.buscarTodos();
+        
+        // Preenche a tabela utilizando o helper
+        helper.preencherTabela(alunos);
     }
     
-    public void salvar(String nome, String descricao) {
-        if (!nome.isEmpty()) {
-            Aluno aluno = new Aluno();
-            aluno.setNome(nome);
-            new AlunoDAO().salvar(aluno);
-            int codAluno = new AlunoDAO().buscarCodigo();
-            if (!descricao.isEmpty()) {
-                Curso curso = new Curso();
-                curso.setDescricao(descricao);
-                new CursoDAO().salvar(curso);
-                int codCurso = new CursoDAO().buscarCodigo();
-                CursoAluno cursoAluno = new CursoAluno();
-                cursoAluno.setCodigoAluno(codAluno);
-                cursoAluno.setCodigoCurso(codCurso);
-                new CursoAlunoDAO().salvar(cursoAluno);
-            }
+    public void salvar() {
+        // Busca a informação da view e cria um objeto Aluno
+        Aluno aluno = helper.obterModelo();
+        
+        // Salva o aluno criado no banco de dados e pega o id
+        new AlunoDAO().salvar(aluno);
+        int codigoAluno = new AlunoDAO().buscarCodigo();
+        
+        // Se tiver preenchido o campo curso cria um curso novo e salva
+        if (! aluno.getCurso().getDescricao().isEmpty()) {
+            
+            // Salva o curso criado no banco de dados e pega o id
+            new CursoDAO().salvar(aluno.getCurso());
+            int codigoCurso = new CursoDAO().buscarCodigo();
+            
+            // Salva o relacionamento
+            CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
+            new CursoAlunoDAO().salvar(ca);
         }
+        
+        // Limpa os campos digitados
+        helper.limparTela();
     }
     
     public void editar(int codigo, String nome, String descricao) {

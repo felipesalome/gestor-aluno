@@ -6,11 +6,8 @@
 package com.felipe.gestor.view;
 
 import com.felipe.gestor.controller.AlunoController;
-import com.felipe.gestor.dao.AlunoDAO;
-import com.felipe.gestor.model.Aluno;
-import com.felipe.gestor.model.Curso;
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,13 +15,15 @@ import java.util.List;
  */
 public class TelaAluno extends javax.swing.JFrame {
 
-    AlunoController aController;
+    private final AlunoController aController;
     
     /**
      * Creates new form TelaAluno
      */
     public TelaAluno() {
         initComponents();
+        aController = new AlunoController(this);
+        iniciar();
     }
 
     /**
@@ -57,7 +56,10 @@ public class TelaAluno extends javax.swing.JFrame {
 
         jTableAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "codigo", "nome", "curso"
@@ -88,8 +90,6 @@ public class TelaAluno extends javax.swing.JFrame {
         if (jTableAlunos.getColumnModel().getColumnCount() > 0) {
             jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
-        aController = new AlunoController(jTableAlunos);
-        aController.tabelaAluno();
 
         jLabelNomeTela.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabelNomeTela.setText("Alunos cadastrados");
@@ -215,17 +215,10 @@ public class TelaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlunoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoSalvarActionPerformed
-        aController = new AlunoController(jTableAlunos);
-       
-        String nomeAluno = jTextFieldAlunoNome.getText();
-        String curso = jTextFieldCursoDescricao.getText();
+
+        this.aController.salvar();
+        this.aController.tabelaAluno();
         
-        aController.salvar(nomeAluno, curso);
-        
-        jTextFieldAlunoNome.setText("");
-        jTextFieldCursoDescricao.setText("");
-        
-        aController.tabelaAluno();
     }//GEN-LAST:event_jButtonAlunoSalvarActionPerformed
 
     private void jTableAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlunosMouseClicked
@@ -238,31 +231,29 @@ public class TelaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableAlunosMouseClicked
 
     private void jButtonAlunoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoEditarActionPerformed
-        aController = new AlunoController(jTableAlunos);
-       
+
         int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
         String nomeAluno = jTextFieldAlunoNome.getText();
         String curso = jTextFieldCursoDescricao.getText();
         
-        aController.editar(codigo, nomeAluno, curso);
+        this.aController.editar(codigo, nomeAluno, curso);
         
         jTextFieldAlunoNome.setText("");
         jTextFieldCursoDescricao.setText("");
         
-        aController.tabelaAluno();
+        this.aController.tabelaAluno();
     }//GEN-LAST:event_jButtonAlunoEditarActionPerformed
 
     private void jButtonAlunoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoApagarActionPerformed
-        aController = new AlunoController(jTableAlunos);
-       
+        
         int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
         
-        aController.apagar(codigo);
+        this.aController.apagar(codigo);
         
         jTextFieldAlunoNome.setText("");
         jTextFieldCursoDescricao.setText("");
         
-        aController.tabelaAluno();
+        this.aController.tabelaAluno();
     }//GEN-LAST:event_jButtonAlunoApagarActionPerformed
 
     /**
@@ -293,10 +284,8 @@ public class TelaAluno extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAluno().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaAluno().setVisible(true);
         });
     }
 
@@ -315,4 +304,32 @@ public class TelaAluno extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldAlunoNome;
     private javax.swing.JTextField jTextFieldCursoDescricao;
     // End of variables declaration//GEN-END:variables
+
+    private void iniciar() {
+        this.aController.tabelaAluno();
+    }
+
+    public JTable getjTableAlunos() {
+        return jTableAlunos;
+    }
+
+    public void setjTableAlunos(JTable jTableAlunos) {
+        this.jTableAlunos = jTableAlunos;
+    }
+
+    public JTextField getjTextFieldAlunoNome() {
+        return jTextFieldAlunoNome;
+    }
+
+    public void setjTextFieldAlunoNome(JTextField jTextFieldAlunoNome) {
+        this.jTextFieldAlunoNome = jTextFieldAlunoNome;
+    }
+
+    public JTextField getjTextFieldCursoDescricao() {
+        return jTextFieldCursoDescricao;
+    }
+
+    public void setjTextFieldCursoDescricao(JTextField jTextFieldCursoDescricao) {
+        this.jTextFieldCursoDescricao = jTextFieldCursoDescricao;
+    }
 }

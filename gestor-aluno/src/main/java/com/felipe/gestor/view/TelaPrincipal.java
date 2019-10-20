@@ -5,17 +5,22 @@
  */
 package com.felipe.gestor.view;
 
+import com.felipe.gestor.controller.PrincipalController;
+
 /**
  *
  * @author felipe
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    private final PrincipalController pController;
+
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        pController = new PrincipalController(this);
     }
 
     /**
@@ -105,13 +110,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoActionPerformed
-        TelaAluno telaAluno = new TelaAluno();
-        telaAluno.setVisible(true);
+        this.pController.telaAluno();
     }//GEN-LAST:event_jButtonAlunoActionPerformed
 
     private void jButtonCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoActionPerformed
-        TelaCurso telaCurso = new TelaCurso();
-        telaCurso.setVisible(true);
+        this.pController.telaCurso();
     }//GEN-LAST:event_jButtonCursoActionPerformed
 
     /**

@@ -14,8 +14,6 @@ import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaCurso;
 import java.util.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CursoController {
     
-    private JTable jTableCursos;
     private final TelaCurso view;
     private final CursoHelper helper;
 
@@ -33,30 +30,36 @@ public class CursoController {
     }
 
     public void tabelaCurso() {
-        
+        // Pegar as informações no banco de dados
         CursoDAO cursoDAO = new CursoDAO();
         List<Curso> cursos = cursoDAO.buscarTodos();
         
+        // Preenche a tabela utilizando o helper
         helper.preencherTabela(cursos);
     }
     
-    public void salvar(String descricao, String ementa, String nome) {
-        if (!descricao.isEmpty()) {
-            Curso curso = new Curso();
-            curso.setDescricao(descricao);
-            curso.setEmenta(ementa);
-            new CursoDAO().salvar(curso);
-            int codCurso = new CursoDAO().buscarCodigo();
-            if (!nome.isEmpty()) {
-                Aluno aluno = new Aluno(nome);
-                new AlunoDAO().salvar(aluno);
-                int codAluno = new AlunoDAO().buscarCodigo();
-                CursoAluno cursoAluno = new CursoAluno();
-                cursoAluno.setCodigoAluno(codAluno);
-                cursoAluno.setCodigoCurso(codCurso);
-                new CursoAlunoDAO().salvar(cursoAluno);
-            }
+    public void salvar() {
+        // Busca as informações da view e cria um objeto curso
+        Curso curso = helper.obterModelo();
+        
+        // Salva o curso criado no banco de dados e pega o id
+        new CursoDAO().salvar(curso);
+        int codigoCurso = new CursoDAO().buscarCodigo();
+        
+        // Se tiver preenchido o campo aluno cria um aluno novo e salva
+        if (!curso.getAluno().getNome().isEmpty()) {
+            
+            // Salva o aluno criado no banco de dados e pega o id
+            new AlunoDAO().salvar(curso.getAluno());
+            int codigoAluno = new AlunoDAO().buscarCodigo();
+            
+            // Salva o relacionamento
+            CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
+            new CursoAlunoDAO().salvar(ca);
         }
+        
+        // Limpa os campos digitados
+        helper.limparTela();
     }
     
     public void editar(int codigo, String descricao ,String ementa ,String nome) {
