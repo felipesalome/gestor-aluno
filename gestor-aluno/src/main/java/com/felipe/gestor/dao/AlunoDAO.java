@@ -85,7 +85,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
     }
 
     @Override
-    public List buscarTodos() {
+    public List<Aluno> buscarTodos() {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -131,7 +131,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return codigo;
     }
     
-    private List listarCursoPorAluno(Connection conn, int codigo) {
+    private Curso listarCursoPorAluno(Connection conn, int codigo) {
         String sql =
                 "SELECT c.* " +
                 "FROM curso c, curso_aluno ca " +
@@ -139,26 +139,24 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
                 "AND ca.codigo_curso = c.codigo";
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        List cursoList = new ArrayList();
+        Curso curso = new Curso();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Curso curso = new Curso();
                 curso.setCodigo(rs.getInt("codigo"));
                 curso.setDescricao(rs.getString("descricao"));
-                cursoList.add(curso);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             Conexao.close(null, pstm, rs);
         }
-        return cursoList;
+        return curso;
     }
     
-    public List buscarAluno(int codigo) {
+    public List<Aluno> buscarAluno(int codigo) {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -183,7 +181,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return alunoList;
     }
     
-    public List buscarAluno(String nome) {
+    public List<Aluno> buscarAluno(String nome) {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -208,7 +206,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return alunoList;
     }
     
-    public List buscarAlunoPorCurso(String curso) {
+    public List<Aluno> buscarAlunoPorCurso(String curso) {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;

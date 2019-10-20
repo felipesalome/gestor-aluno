@@ -5,12 +5,14 @@
  */
 package com.felipe.gestor.controller;
 
+import com.felipe.gestor.controller.helper.CursoHelper;
 import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.dao.CursoAlunoDAO;
 import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
+import com.felipe.gestor.view.TelaCurso;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,34 +21,23 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author felipe
  */
-public class CursoController implements ICursoController{
+public class CursoController {
     
     private JTable jTableCursos;
+    private final TelaCurso view;
+    private final CursoHelper helper;
 
-    public CursoController() {}
-
-    public CursoController(JTable jTableCursos) {
-        this.jTableCursos = jTableCursos;
+    public CursoController(TelaCurso view) {
+        this.view = view;
+        this.helper = new CursoHelper(view);
     }
 
-    @Override
     public void tabelaCurso() {
-        if (jTableCursos != null) {
-            DefaultTableModel modelo = (DefaultTableModel) jTableCursos.getModel();
-            if (modelo.getRowCount() > 0) {
-                modelo.setRowCount(0);
-            }
-            CursoDAO aluno = new CursoDAO();
-            List<Curso> listAluno = aluno.buscarTodos();
-            for (Curso a : listAluno) {
-                Object[] linha = new Object[4];
-                linha[0] = a.getCodigo();
-                linha[1] = a.getDescricao();
-                linha[2] = a.getEmenta();
-                linha[3] = a.getAluno();
-                modelo.addRow(linha);
-            }
-        }
+        
+        CursoDAO cursoDAO = new CursoDAO();
+        List<Curso> cursos = cursoDAO.buscarTodos();
+        
+        helper.preencherTabela(cursos);
     }
     
     public void salvar(String descricao, String ementa, String nome) {

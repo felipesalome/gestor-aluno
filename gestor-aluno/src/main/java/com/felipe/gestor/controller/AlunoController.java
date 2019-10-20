@@ -11,6 +11,7 @@ import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
+import com.felipe.gestor.view.TelaAluno;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,18 +20,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author felipe
  */
-public class AlunoController implements IAlunoController{
+public class AlunoController {
     
-    private JTable jTableAlunos;
+    private final TelaAluno view;
     
-    public AlunoController() {}
-
-    public AlunoController(JTable jTableAlunos) {
-        this.jTableAlunos = jTableAlunos;
+    public AlunoController(TelaAluno view) {
+        this.view = view;
     }
 
-    @Override
-    public void tabelaAluno() {
+    public void tabelaAluno(JTable jTableAlunos) {
         if (jTableAlunos != null) {
             DefaultTableModel modelo = (DefaultTableModel) jTableAlunos.getModel();
             if (modelo.getRowCount() > 0) {
@@ -38,13 +36,15 @@ public class AlunoController implements IAlunoController{
             }
             AlunoDAO aluno = new AlunoDAO();
             List<Aluno> listAluno = aluno.buscarTodos();
-            for (Aluno a : listAluno) {
+            listAluno.stream().map((a) -> {
                 Object[] linha = new Object[3];
                 linha[0] = a.getCodigo();
                 linha[1] = a.getNome();
                 linha[2] = a.getCurso();
+                return linha;
+            }).forEachOrdered((linha) -> {
                 modelo.addRow(linha);
-            }
+            });
         }
     }
     

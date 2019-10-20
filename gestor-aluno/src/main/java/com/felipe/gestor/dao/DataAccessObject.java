@@ -17,6 +17,6 @@ public interface DataAccessObject<T> {
     boolean salvar(T entidade);
     boolean editar(T entidade);
     boolean apagar(T entidade);
-    List buscarTodos();
+    List<T> buscarTodos();
     int buscarCodigo();
 }
