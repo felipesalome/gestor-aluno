@@ -28,6 +28,7 @@ public class PrincipalController {
     }
     
     public void telaCurso() {
+        
         TelaCurso telaCurso = new TelaCurso();
         telaCurso.setVisible(true);
     }

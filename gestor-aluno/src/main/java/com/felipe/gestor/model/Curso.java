@@ -18,6 +18,10 @@ public class Curso {
     
     public Curso() {}
     
+    public Curso(String descricao) {
+        this.descricao = descricao;
+    }
+    
     public Curso(String descricao, String ementa) {
         this.descricao = descricao;
         this.ementa = ementa;

@@ -14,8 +14,6 @@ import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaCurso;
 import java.util.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CursoController {
     
-    private JTable jTableCursos;
     private final TelaCurso view;
     private final CursoHelper helper;
 
@@ -33,10 +30,11 @@ public class CursoController {
     }
 
     public void tabelaCurso() {
-        
+        // Pegar as informações no banco de dados
         CursoDAO cursoDAO = new CursoDAO();
         List<Curso> cursos = cursoDAO.buscarTodos();
         
+        // Preenche a tabela utilizando o helper
         helper.preencherTabela(cursos);
     }
     
