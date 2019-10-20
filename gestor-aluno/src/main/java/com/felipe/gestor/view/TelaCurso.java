@@ -6,6 +6,9 @@
 package com.felipe.gestor.view;
 
 import com.felipe.gestor.controller.CursoController;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -13,12 +16,15 @@ import com.felipe.gestor.controller.CursoController;
  */
 public class TelaCurso extends javax.swing.JFrame {
 
-    CursoController cController;
+    private final CursoController cController;
+
     /**
      * Creates new form TelaCurso
      */
     public TelaCurso() {
         initComponents();
+        cController = new CursoController(this);
+        iniciar();
     }
 
     /**
@@ -142,8 +148,6 @@ public class TelaCurso extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTableCursos);
-        cController = new CursoController(jTableCursos);
-        cController.tabelaCurso();
 
         jButtonCursoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonCursoEditar.setText("Editar");
@@ -213,19 +217,10 @@ public class TelaCurso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCursoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoSalvarActionPerformed
-        cController = new CursoController(jTableCursos);
-       
-        String descricao = jTextFieldCursoDescricao.getText();
-        String ementa = jTextAreaCursoEmenta.getText();
-        String nome = jTextFieldAlunoNome.getText();
+      
+        this.cController.salvar();
+        this.cController.tabelaCurso();
         
-        cController.salvar(descricao, ementa, nome);
-        
-        jTextFieldCursoDescricao.setText("");
-        jTextAreaCursoEmenta.setText("");
-        jTextFieldAlunoNome.setText("");
-        
-        cController.tabelaCurso();
     }//GEN-LAST:event_jButtonCursoSalvarActionPerformed
 
     private void jTableCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCursosMouseClicked
@@ -238,7 +233,6 @@ public class TelaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableCursosMouseClicked
 
     private void jButtonCursoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoEditarActionPerformed
-        cController = new CursoController(jTableCursos);
        
         int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
         String descricao = jTextFieldCursoDescricao.getText();
@@ -255,7 +249,6 @@ public class TelaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCursoEditarActionPerformed
 
     private void jButtonCursoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoApagarActionPerformed
-        cController = new CursoController(jTableCursos);
        
         int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
         
@@ -296,10 +289,8 @@ public class TelaCurso extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCurso().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaCurso().setVisible(true);
         });
     }
 
@@ -319,4 +310,40 @@ public class TelaCurso extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldAlunoNome;
     private javax.swing.JTextField jTextFieldCursoDescricao;
     // End of variables declaration//GEN-END:variables
+
+    private void iniciar() {
+        this.cController.tabelaCurso();
+    }
+
+    public JTextArea getjTextAreaCursoEmenta() {
+        return jTextAreaCursoEmenta;
+    }
+
+    public void setjTextAreaCursoEmenta(JTextArea jTextAreaCursoEmenta) {
+        this.jTextAreaCursoEmenta = jTextAreaCursoEmenta;
+    }
+
+    public JTextField getjTextFieldAlunoNome() {
+        return jTextFieldAlunoNome;
+    }
+
+    public void setjTextFieldAlunoNome(JTextField jTextFieldAlunoNome) {
+        this.jTextFieldAlunoNome = jTextFieldAlunoNome;
+    }
+
+    public JTextField getjTextFieldCursoDescricao() {
+        return jTextFieldCursoDescricao;
+    }
+
+    public void setjTextFieldCursoDescricao(JTextField jTextFieldCursoDescricao) {
+        this.jTextFieldCursoDescricao = jTextFieldCursoDescricao;
+    }
+
+    public JTable getjTableCursos() {
+        return jTableCursos;
+    }
+
+    public void setjTableCursos(JTable jTableCursos) {
+        this.jTableCursos = jTableCursos;
+    }
 }
