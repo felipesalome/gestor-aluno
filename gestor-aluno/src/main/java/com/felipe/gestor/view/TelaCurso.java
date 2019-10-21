@@ -224,41 +224,23 @@ public class TelaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCursoSalvarActionPerformed
 
     private void jTableCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCursosMouseClicked
-        if (jTableCursos.getSelectedRow() != -1){
-            
-            jTextFieldCursoDescricao.setText(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 1).toString());
-            jTextAreaCursoEmenta.setText((String) jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 2));
-            jTextFieldAlunoNome.setText(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 3).toString());
-        }
+        
+        this.cController.selecionaLinha();
+        
     }//GEN-LAST:event_jTableCursosMouseClicked
 
     private void jButtonCursoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoEditarActionPerformed
        
-        int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
-        String descricao = jTextFieldCursoDescricao.getText();
-        String ementa = jTextAreaCursoEmenta.getText();
-        String nome = jTextFieldAlunoNome.getText();
+        this.cController.editar();
+        this.cController.tabelaCurso();
         
-        cController.editar(codigo, descricao, ementa, nome);
-        
-        jTextFieldCursoDescricao.setText("");
-        jTextAreaCursoEmenta.setText("");
-        jTextFieldAlunoNome.setText("");
-        
-        cController.tabelaCurso();
     }//GEN-LAST:event_jButtonCursoEditarActionPerformed
 
     private void jButtonCursoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCursoApagarActionPerformed
        
-        int codigo = Integer.parseInt(jTableCursos.getValueAt(jTableCursos.getSelectedRow(), 0).toString());
+        this.cController.apagar();
+        this.cController.tabelaCurso();
         
-        cController.apagar(codigo);
-        
-        jTextFieldCursoDescricao.setText("");
-        jTextAreaCursoEmenta.setText("");
-        jTextFieldAlunoNome.setText("");
-        
-        cController.tabelaCurso();
     }//GEN-LAST:event_jButtonCursoApagarActionPerformed
 
     /**

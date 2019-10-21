@@ -137,12 +137,11 @@ public class CursoDAO implements DataAccessObject<Curso> {
         return aluno;
     }
     
-    public List buscarCurso(int codigo) {
+    public Curso buscarCurso(int codigo) {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM curso WHERE codigo = ?";
-        List cursoList = new ArrayList();
         Curso curso = null;
         try {
             pstm = conn.prepareStatement(sql);
@@ -153,14 +152,14 @@ public class CursoDAO implements DataAccessObject<Curso> {
                 curso.setCodigo(rs.getInt("codigo"));
                 curso.setDescricao(rs.getString("descricao"));
                 curso.setEmenta(rs.getString("ementa"));
-                cursoList.add(curso);
+                curso.setAluno(listarAlunosPorCurso(conn, curso.getCodigo()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             Conexao.close(conn, pstm, rs);
         }
-        return cursoList;
+        return curso;
     }
     
     public List buscarCurso(String busca) {

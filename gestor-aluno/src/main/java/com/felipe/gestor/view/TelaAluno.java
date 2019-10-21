@@ -228,29 +228,17 @@ public class TelaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableAlunosMouseClicked
 
     private void jButtonAlunoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoEditarActionPerformed
-
-        int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
-        String nomeAluno = jTextFieldAlunoNome.getText();
-        String curso = jTextFieldCursoDescricao.getText();
         
-        this.aController.editar(codigo, nomeAluno, curso);
-        
-        jTextFieldAlunoNome.setText("");
-        jTextFieldCursoDescricao.setText("");
-        
+        this.aController.editar();
         this.aController.tabelaAluno();
+        
     }//GEN-LAST:event_jButtonAlunoEditarActionPerformed
 
     private void jButtonAlunoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoApagarActionPerformed
         
-        int codigo = Integer.parseInt(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString());
-        
-        this.aController.apagar(codigo);
-        
-        jTextFieldAlunoNome.setText("");
-        jTextFieldCursoDescricao.setText("");
-        
+        this.aController.apagar();
         this.aController.tabelaAluno();
+        
     }//GEN-LAST:event_jButtonAlunoApagarActionPerformed
 
     /**
