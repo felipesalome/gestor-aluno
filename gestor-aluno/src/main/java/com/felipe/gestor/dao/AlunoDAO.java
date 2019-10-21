@@ -156,12 +156,11 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return curso;
     }
     
-    public List<Aluno> buscarAluno(int codigo) {
+    public Aluno buscarAluno(int codigo) {
         Connection conn = Conexao.open();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM aluno WHERE aluno.codigo = ?";
-        List alunoList = new ArrayList();
         Aluno aluno = null;
         try {
             pstm = conn.prepareStatement(sql);
@@ -171,14 +170,14 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
                 aluno = new Aluno();
                 aluno.setCodigo(rs.getInt("codigo"));
                 aluno.setNome(rs.getString("nome"));
-                alunoList.add(aluno);
+                aluno.setCurso(listarCursoPorAluno(conn, aluno.getCodigo()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             Conexao.close(conn, pstm, rs);
         }
-        return alunoList;
+        return aluno;
     }
     
     public List<Aluno> buscarAluno(String nome) {

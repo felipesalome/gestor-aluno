@@ -89,4 +89,20 @@ public class AlunoController {
             new AlunoDAO().apagar(aluno);
         }
     }
+
+    public void selecionaLinha() {
+        // Verifica se alguma linha da jTable foi selecionado    
+        if (view.getjTableAlunos().getSelectedRow() != -1) {
+            // Busca o codigo do aluno no jTableAlunos da view
+            int codAluno =
+                    Integer.parseInt(view.getjTableAlunos()
+                    .getValueAt(view.getjTableAlunos().getSelectedRow(), 0)
+                    .toString());
+            // Busca no banco o aluno selecionado
+            Aluno aluno = new AlunoDAO().buscarAluno(codAluno);
+
+            // Envia pra view os dados do banco
+            helper.setarModelo(aluno);
+        }
+    }
 }
