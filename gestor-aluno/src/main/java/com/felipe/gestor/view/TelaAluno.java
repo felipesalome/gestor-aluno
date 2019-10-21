@@ -223,11 +223,8 @@ public class TelaAluno extends javax.swing.JFrame {
 
     private void jTableAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlunosMouseClicked
         
-        if (jTableAlunos.getSelectedRow() != -1){
-            
-            jTextFieldAlunoNome.setText(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 1).toString());
-            jTextFieldCursoDescricao.setText(jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 2).toString());
-        }
+        this.aController.selecionaLinha();
+        
     }//GEN-LAST:event_jTableAlunosMouseClicked
 
     private void jButtonAlunoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoEditarActionPerformed
