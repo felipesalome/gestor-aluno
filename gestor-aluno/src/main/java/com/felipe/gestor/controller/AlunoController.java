@@ -42,7 +42,7 @@ public class AlunoController {
     public void salvar() {
         // Verifica se existe conteudo para salvar
         if (helper.obterModelo().getNome().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Favor preencher o campo nome do formulario");
+            JOptionPane.showMessageDialog(null, "Favor preencher o campo nome do formulario");
         } else {
             // Busca a informação da view e cria um objeto Aluno
             Aluno aluno = helper.obterModelo();
@@ -71,7 +71,7 @@ public class AlunoController {
     public void editar() {
         // Verifica se existe conteudo para salvar
         if (helper.obterModelo().getNome().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Favor selecionar o aluno correto");
+            JOptionPane.showMessageDialog(null, "Favor selecionar o aluno correto");
         } else {
             // Busca o codigo do Aluno na view
             int codigoExisteAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
