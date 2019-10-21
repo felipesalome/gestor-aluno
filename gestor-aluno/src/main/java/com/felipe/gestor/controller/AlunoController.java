@@ -14,6 +14,7 @@ import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,53 +40,81 @@ public class AlunoController {
     }
     
     public void salvar() {
-        // Busca a informação da view e cria um objeto Aluno
-        Aluno aluno = helper.obterModelo();
-        
-        // Salva o aluno criado no banco de dados e pega o id
-        new AlunoDAO().salvar(aluno);
-        int codigoAluno = new AlunoDAO().buscarCodigo();
-        
-        // Se tiver preenchido o campo curso cria um curso novo e salva
-        if (! aluno.getCurso().getDescricao().isEmpty()) {
-            
-            // Salva o curso criado no banco de dados e pega o id
-            new CursoDAO().salvar(aluno.getCurso());
-            int codigoCurso = new CursoDAO().buscarCodigo();
-            
-            // Salva o relacionamento
-            CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
-            new CursoAlunoDAO().salvar(ca);
+        // Verifica se existe conteudo para salvar
+        if (helper.obterModelo().getNome().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Favor preencher o campo nome do formulario");
+        } else {
+            // Busca a informação da view e cria um objeto Aluno
+            Aluno aluno = helper.obterModelo();
+
+            // Salva o aluno criado no banco de dados e pega o id
+            new AlunoDAO().salvar(aluno);
+            int codigoAluno = new AlunoDAO().buscarCodigo();
+
+            // Se tiver preenchido o campo curso cria um curso novo e salva
+            if (! aluno.getCurso().getDescricao().isEmpty()) {
+
+                // Salva o curso criado no banco de dados e pega o id
+                new CursoDAO().salvar(aluno.getCurso());
+                int codigoCurso = new CursoDAO().buscarCodigo();
+
+                // Salva o relacionamento
+                CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
+                new CursoAlunoDAO().salvar(ca);
+            }
+
+            // Limpa os campos digitados
+            helper.limparTela();
         }
-        
-        // Limpa os campos digitados
-        helper.limparTela();
     }
     
-    public void editar(int codigo, String nome, String descricao) {
-        if (!nome.isEmpty()) {
-            Aluno aluno = new Aluno();
-            aluno.setCodigo(codigo);
-            aluno.setNome(nome);
-            new AlunoDAO().editar(aluno);
-            int codAluno = new AlunoDAO().buscarCodigo();
-            if (!descricao.isEmpty()) {
-                Curso curso = new Curso();
-                curso.setDescricao(descricao);
-                new CursoDAO().salvar(curso);
-                int codCurso = new CursoDAO().buscarCodigo();
-                CursoAluno cursoAluno = new CursoAluno();
-                cursoAluno.setCodigoAluno(codAluno);
-                cursoAluno.setCodigoCurso(codCurso);
-                new CursoAlunoDAO().salvar(cursoAluno);
+    public void editar() {
+        // Verifica se existe conteudo para salvar
+        if (helper.obterModelo().getNome().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Favor selecionar o aluno correto");
+        } else {
+            // Busca o codigo do Aluno na view
+            int codigoExisteAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
+            // Busca o aluno com o codigo
+            Aluno existeAluno = new AlunoDAO().buscarAluno(codigoExisteAluno);
+            
+            // Verifica se o aluno existe
+            if (!"".equals(existeAluno.toString())) {
+                // Pega a informação da view e cria um objeto Aluno
+                Aluno aluno = helper.obterModelo();
+                aluno.setCodigo(codigoExisteAluno);
+                
+                // Salva o aluno criado no banco de dados e pega o id
+                new AlunoDAO().editar(aluno);
+                int codigoAluno = new AlunoDAO().buscarCodigo();
+                
+                // Se tiver preenchido o campo curso cria um curso novo e salva
+                if (! aluno.getCurso().getDescricao().isEmpty()) {
+
+                    // Salva o curso criado no banco de dados e pega o id
+                    new CursoDAO().salvar(aluno.getCurso());
+                    int codigoCurso = new CursoDAO().buscarCodigo();
+
+                    // Salva o relacionamento
+                    CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
+                    new CursoAlunoDAO().salvar(ca);
+                }
+
+                // Limpa os campos digitados
+                helper.limparTela();
             }
         }
     }
     
-    public void apagar(int codigo) {
-        if (codigo != 0) {
+    public void apagar() {
+        // Busca o codigo do Aluno selecionado na view
+        int codigoAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
+        
+        // Verifica se o codigo é valido
+        if (codigoAluno != 0) {
+            // Cria um objeto do tipo aluno para apagar no banco
             Aluno aluno = new Aluno();
-            aluno.setCodigo(codigo);
+            aluno.setCodigo(codigoAluno);
             new AlunoDAO().apagar(aluno);
         }
     }
