@@ -23,3 +23,9 @@
 hs_err_pid*
 /gestor-aluno/nbproject/
 /gestor-aluno/target/
+
+# visual studio
+.vscode/*
+gestor-aluno/.classpath
+gestor-aluno/.project
+gestor-aluno/.settings/*

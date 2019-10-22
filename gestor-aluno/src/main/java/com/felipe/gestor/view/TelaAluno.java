@@ -24,7 +24,6 @@ public class TelaAluno extends javax.swing.JFrame {
         initComponents();
         aController = new AlunoController(this);
         iniciar();
-        System.out.println(System.getProperty("os.name"));
     }
 
     /**
