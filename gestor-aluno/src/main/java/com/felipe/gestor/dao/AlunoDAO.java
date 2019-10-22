@@ -235,4 +235,49 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return alunoList;
     }
     
+    public int countAluno() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(codigo) AS qntdAluno FROM aluno";
+        int valor = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                valor = rs.getInt("qntdAluno");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return valor;
+    }
+
+    public int countAlunoSemCurso() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql =
+                "SELECT COUNT(aluno.codigo) AS qntdAluno " +
+                "FROM aluno " +
+                "LEFT JOIN curso_aluno " +
+                "ON aluno.codigo = curso_aluno.codigo_aluno " +
+                "WHERE curso_aluno.codigo_aluno is null";
+        int valor = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                valor = rs.getInt("qntdAluno");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return valor;
+    }
+    
 }

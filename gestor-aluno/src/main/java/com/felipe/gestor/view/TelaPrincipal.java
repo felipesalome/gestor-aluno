@@ -6,6 +6,7 @@
 package com.felipe.gestor.view;
 
 import com.felipe.gestor.controller.PrincipalController;
+import javax.swing.JLabel;
 
 /**
  *
@@ -21,6 +22,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         pController = new PrincipalController(this);
+        iniciar();
     }
 
     /**
@@ -90,7 +92,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos"));
 
         countAlunos.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        countAlunos.setText("00");
+        countAlunos.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,7 +101,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(countAlunos)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +114,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos sem curso"));
 
         countAlunosOutCurso.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        countAlunosOutCurso.setText("00");
+        countAlunosOutCurso.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,7 +123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(countAlunosOutCurso)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +136,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos"));
 
         countCursos.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        countCursos.setText("00");
+        countCursos.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,7 +158,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos sem aluno"));
 
         countCursosOutAluno.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        countCursosOutAluno.setText("00");
+        countCursosOutAluno.setText("0");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -184,11 +186,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanelConteudoLayout.setVerticalGroup(
             jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,4 +282,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelConteudo;
     private javax.swing.JPanel jPanelMenu;
     // End of variables declaration//GEN-END:variables
+
+    public void iniciar() {
+        this.pController.contadores();
+    }
+
+    public JLabel getCountAlunos() {
+        return countAlunos;
+    }
+
+    public void setCountAlunos(JLabel countAlunos) {
+        this.countAlunos = countAlunos;
+    }
+
+    public JLabel getCountAlunosOutCurso() {
+        return countAlunosOutCurso;
+    }
+
+    public void setCountAlunosOutCurso(JLabel countAlunosOutCurso) {
+        this.countAlunosOutCurso = countAlunosOutCurso;
+    }
+
+    public JLabel getCountCursos() {
+        return countCursos;
+    }
+
+    public void setCountCursos(JLabel countCursos) {
+        this.countCursos = countCursos;
+    }
+
+    public JLabel getCountCursosOutAluno() {
+        return countCursosOutAluno;
+    }
+
+    public void setCountCursosOutAluno(JLabel countCursosOutAluno) {
+        this.countCursosOutAluno = countCursosOutAluno;
+    }
 }
