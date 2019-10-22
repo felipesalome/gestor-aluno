@@ -3,9 +3,10 @@ SET time_zone = "+03:00";
 
 CREATE USER 'gestor-aluno'@'localhost' IDENTIFIED BY '1234';
 
-GRANT ALL PRIVILEGES ON `gestor` . * TO 'gestor-aluno'@'localhost';
+DROP DATABASE IF EXISTS `gestor`;
+CREATE DATABASE `gestor`;
 
-CREATE DATABASE IF NOT EXISTS `gestor`;
+GRANT ALL PRIVILEGES ON `gestor` . * TO 'gestor-aluno'@'localhost';
 
 USE `gestor`;
 
@@ -15,7 +16,8 @@ USE `gestor`;
 -- Estrutura da tabela `curso`
 --
 
-CREATE TABLE IF NOT EXISTS `curso` (
+DROP TABLE IF EXISTS `curso`;
+CREATE TABLE `curso` (
 	`codigo` int NOT NULL AUTO_INCREMENT,
 	`descricao` varchar(50) NOT NULL,
 	`ementa` text DEFAULT NULL,
@@ -26,7 +28,8 @@ CREATE TABLE IF NOT EXISTS `curso` (
 -- Estrutura da tabela `aluno`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno` (
+DROP TABLE IF EXISTS `aluno`;
+CREATE TABLE `aluno` (
 	`codigo` int NOT NULL AUTO_INCREMENT,
 	`nome` varchar(50) NOT NULL,
 	PRIMARY KEY(`codigo`)
@@ -36,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 -- Estrutura da tabela `curso_aluno`
 --
 
-CREATE TABLE IF NOT EXISTS `curso_aluno` (
+DROP TABLE IF EXISTS `curso_aluno`;
+CREATE TABLE `curso_aluno` (
 	`codigo` int NOT NULL AUTO_INCREMENT,
 	`codigo_aluno` int NOT NULL,
 	`codigo_curso` int NOT NULL,
