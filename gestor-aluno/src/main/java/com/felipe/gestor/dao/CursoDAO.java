@@ -244,4 +244,49 @@ public class CursoDAO implements DataAccessObject<Curso> {
         return codigo;
     }
     
+    public int countCurso() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(codigo) AS qntdCurso FROM curso";
+        int valor = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                valor = rs.getInt("qntdCurso");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return valor;
+    }
+
+    public int countCursoSemAluno() {
+        Connection conn = Conexao.open();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql =
+                "SELECT COUNT(curso.codigo) AS qntdCurso " +
+                "FROM curso " +
+                "LEFT JOIN curso_aluno " +
+                "ON curso.codigo = curso_aluno.codigo_curso " +
+                "WHERE curso_aluno.codigo_curso is null";
+        int valor = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                valor = rs.getInt("qntdCurso");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.close(conn, pstm, rs);
+        }
+        return valor;
+    }
+    
 }

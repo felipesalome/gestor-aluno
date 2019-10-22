@@ -10,9 +10,9 @@ import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.dao.CursoAlunoDAO;
 import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
-import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
+import com.felipe.gestor.view.TelaPrincipal;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -52,7 +52,7 @@ public class AlunoController {
             int codigoAluno = new AlunoDAO().buscarCodigo();
 
             // Se tiver preenchido o campo curso cria um curso novo e salva
-            if (! aluno.getCurso().getDescricao().isEmpty()) {
+            if (aluno.getCurso() != null) {
 
                 // Salva o curso criado no banco de dados e pega o id
                 new CursoDAO().salvar(aluno.getCurso());
@@ -89,7 +89,7 @@ public class AlunoController {
                 int codigoAluno = new AlunoDAO().buscarCodigo();
                 
                 // Se tiver preenchido o campo curso cria um curso novo e salva
-                if (! aluno.getCurso().getDescricao().isEmpty()) {
+                if (aluno.getCurso() != null) {
 
                     // Salva o curso criado no banco de dados e pega o id
                     new CursoDAO().salvar(aluno.getCurso());
@@ -133,5 +133,9 @@ public class AlunoController {
             // Envia pra view os dados do banco
             helper.setarModelo(aluno);
         }
+    }
+
+    public void atualizaPrincipal() {
+        new TelaPrincipal().iniciar();
     }
 }

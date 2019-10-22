@@ -52,7 +52,7 @@ public class CursoController {
             int codigoCurso = new CursoDAO().buscarCodigo();
 
             // Se tiver preenchido o campo aluno cria um aluno novo e salva
-            if (!curso.getAluno().getNome().isEmpty()) {
+            if (curso.getAluno() != null) {
 
                 // Salva o aluno criado no banco de dados e pega o id
                 new AlunoDAO().salvar(curso.getAluno());
@@ -89,7 +89,7 @@ public class CursoController {
                 int codigoCurso = new CursoDAO().buscarCodigo();
                 
                 // Se tiver preenchido o campo curso cria um aluno novo e salva
-                if (! curso.getAluno().getNome().isEmpty()) {
+                if (curso.getAluno() != null) {
 
                     // Salva o aluno criado no banco de dados e pega o id
                     new AlunoDAO().salvar(curso.getAluno());
