@@ -12,7 +12,6 @@ import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
-import com.felipe.gestor.view.TelaPrincipal;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -133,9 +132,5 @@ public class AlunoController {
             // Envia pra view os dados do banco
             helper.setarModelo(aluno);
         }
-    }
-
-    public void atualizaPrincipal() {
-        new TelaPrincipal().iniciar();
     }
 }

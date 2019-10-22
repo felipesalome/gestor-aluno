@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.felipe</groupId>
     <artifactId>gestor-aluno</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
     <build>
         <pluginManagement>
             <plugins>
@@ -40,6 +40,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -100,4 +113,5 @@
             <version>4.11</version>
         </dependency>
     </dependencies>
+    <name>Gestor</name>
 </project>
