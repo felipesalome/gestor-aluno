@@ -9,7 +9,6 @@ import com.felipe.gestor.controller.helper.CursoHelper;
 import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.dao.CursoAlunoDAO;
 import com.felipe.gestor.dao.CursoDAO;
-import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaCurso;

@@ -5,7 +5,6 @@
  */
 package com.felipe.gestor.dao;
 
-import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
