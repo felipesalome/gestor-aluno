@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class Conexao {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost/gestor";
+    private static final String URL = "jdbc:mysql://localhost:3306/gestor";
     private static final String USUARIO = "gestor-aluno";
     private static final String SENHA = "1234";
     
