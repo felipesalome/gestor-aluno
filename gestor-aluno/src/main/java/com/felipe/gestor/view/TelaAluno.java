@@ -36,18 +36,17 @@ public class TelaAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelConteudo = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAlunos = new javax.swing.JTable();
-        jLabelNomeTela = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanelFormularioAluno = new javax.swing.JPanel();
         jLabelNome = new javax.swing.JLabel();
         jTextFieldAlunoNome = new javax.swing.JTextField();
         jLabelCurso = new javax.swing.JLabel();
         jTextFieldCursoDescricao = new javax.swing.JTextField();
         jButtonAlunoSalvar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAlunos = new javax.swing.JTable();
         jButtonAlunoEditar = new javax.swing.JButton();
         jButtonAlunoApagar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestor de alunos");
@@ -57,6 +56,31 @@ public class TelaAluno extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+        });
+
+        jPanelFormularioAluno.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos"));
+
+        jLabelNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jLabelNome.setText("Nome");
+
+        jTextFieldAlunoNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabelCurso.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jLabelCurso.setText("Curso");
+
+        jTextFieldCursoDescricao.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextFieldCursoDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCursoDescricaoActionPerformed(evt);
+            }
+        });
+
+        jButtonAlunoSalvar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButtonAlunoSalvar.setText("Salvar");
+        jButtonAlunoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlunoSalvarActionPerformed(evt);
             }
         });
 
@@ -97,59 +121,6 @@ public class TelaAluno extends javax.swing.JFrame {
             jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
 
-        jLabelNomeTela.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabelNomeTela.setText("Alunos cadastrados");
-
-        jPanelFormularioAluno.setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar Aluno"));
-
-        jLabelNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jLabelNome.setText("Nome");
-
-        jTextFieldAlunoNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-
-        jLabelCurso.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jLabelCurso.setText("Curso");
-
-        jTextFieldCursoDescricao.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-
-        jButtonAlunoSalvar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButtonAlunoSalvar.setText("Salvar");
-        jButtonAlunoSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlunoSalvarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelFormularioAlunoLayout = new javax.swing.GroupLayout(jPanelFormularioAluno);
-        jPanelFormularioAluno.setLayout(jPanelFormularioAlunoLayout);
-        jPanelFormularioAlunoLayout.setHorizontalGroup(
-            jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelNome)
-                    .addComponent(jTextFieldAlunoNome)
-                    .addComponent(jLabelCurso)
-                    .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jButtonAlunoSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelFormularioAlunoLayout.setVerticalGroup(
-            jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelCurso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAlunoSalvar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jButtonAlunoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonAlunoEditar.setText("Editar");
         jButtonAlunoEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,42 +137,72 @@ public class TelaAluno extends javax.swing.JFrame {
             }
         });
 
+        jButtonLimpar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButtonLimpar.setText("Limpar");
+
+        javax.swing.GroupLayout jPanelFormularioAlunoLayout = new javax.swing.GroupLayout(jPanelFormularioAluno);
+        jPanelFormularioAluno.setLayout(jPanelFormularioAlunoLayout);
+        jPanelFormularioAlunoLayout.setHorizontalGroup(
+            jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
+                .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButtonAlunoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAlunoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAlunoApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelCurso)
+                            .addComponent(jLabelNome))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jTextFieldAlunoNome))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanelFormularioAlunoLayout.setVerticalGroup(
+            jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFormularioAlunoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNome)
+                    .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCurso)
+                    .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(126, 126, 126)
+                .addGroup(jPanelFormularioAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButtonAlunoSalvar)
+                    .addComponent(jButtonAlunoEditar)
+                    .addComponent(jButtonAlunoApagar)
+                    .addComponent(jButtonLimpar))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanelConteudoLayout = new javax.swing.GroupLayout(jPanelConteudo);
         jPanelConteudo.setLayout(jPanelConteudoLayout);
         jPanelConteudoLayout.setHorizontalGroup(
             jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanelConteudoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelFormularioAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelConteudoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAlunoEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAlunoApagar, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
-                    .addGroup(jPanelConteudoLayout.createSequentialGroup()
-                        .addComponent(jLabelNomeTela)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanelFormularioAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelConteudoLayout.setVerticalGroup(
             jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConteudoLayout.createSequentialGroup()
+            .addGroup(jPanelConteudoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelFormularioAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelNomeTela)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelConteudoLayout.createSequentialGroup()
-                        .addComponent(jButtonAlunoEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAlunoApagar)))
                 .addContainerGap())
         );
 
@@ -251,6 +252,10 @@ public class TelaAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
 
+    private void jTextFieldCursoDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCursoDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCursoDescricaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,13 +293,12 @@ public class TelaAluno extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlunoApagar;
     private javax.swing.JButton jButtonAlunoEditar;
     private javax.swing.JButton jButtonAlunoSalvar;
+    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JLabel jLabelCurso;
     private javax.swing.JLabel jLabelNome;
-    private javax.swing.JLabel jLabelNomeTela;
     private javax.swing.JPanel jPanelConteudo;
     private javax.swing.JPanel jPanelFormularioAluno;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableAlunos;
     private javax.swing.JTextField jTextFieldAlunoNome;
     private javax.swing.JTextField jTextFieldCursoDescricao;
