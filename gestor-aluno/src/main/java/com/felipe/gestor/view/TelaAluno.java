@@ -139,6 +139,11 @@ public class TelaAluno extends javax.swing.JFrame {
 
         jButtonLimpar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFormularioAlunoLayout = new javax.swing.GroupLayout(jPanelFormularioAluno);
         jPanelFormularioAluno.setLayout(jPanelFormularioAlunoLayout);
@@ -255,6 +260,12 @@ public class TelaAluno extends javax.swing.JFrame {
     private void jTextFieldCursoDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCursoDescricaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCursoDescricaoActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        
+        this.aController.limpar();
+        
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
