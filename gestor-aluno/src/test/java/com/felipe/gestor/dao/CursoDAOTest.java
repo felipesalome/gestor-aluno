@@ -45,14 +45,18 @@ public class CursoDAOTest {
     @Test
     public void testSalvar() {
         System.out.println("salvar");
+        
         Curso entidade = new Curso("POO", "Objetos, Classes, Atributos e Métodos");
         CursoDAO instance = new CursoDAO();
+        
         boolean expResult = true;
         boolean result = instance.salvar(entidade);
-        assertEquals(expResult, result);
+        
         int codigo = instance.buscarCodigo();
         Curso curso = instance.buscarCurso(codigo);
         instance.apagar(curso);
+        
+        assertEquals(expResult, result);
     }
 
     /**
@@ -61,16 +65,21 @@ public class CursoDAOTest {
     @Test
     public void testEditar() {
         System.out.println("editar");
+        
         CursoDAO instance = new CursoDAO();
         instance.salvar(new Curso("POO", "Objetos, Classes, Atributos e Métodos"));
+        
         int codigo = instance.buscarCodigo();
         Curso entidade = instance.buscarCurso(codigo);
         Curso curso = new Curso("Java POO", "Objetos, Classes, Atributos e Métodos");
         curso.setCodigo(entidade.getCodigo());
+        
         boolean expResult = true;
         boolean result = instance.editar(entidade);
-        assertEquals(expResult, result);
+        
         instance.apagar(entidade);
+        
+        assertEquals(expResult, result);
     }
 
     /**

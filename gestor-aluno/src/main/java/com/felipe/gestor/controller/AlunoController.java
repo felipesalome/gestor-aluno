@@ -43,7 +43,7 @@ public class AlunoController {
         if (helper.obterModelo().getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Favor preencher o campo nome do formulario");
         } else {
-            // Busca a informação da view e cria um objeto Aluno
+            // Recebe a informação da view e cria um objeto Aluno
             Aluno aluno = helper.obterModelo();
 
             // Salva o aluno criado no banco de dados e pega o id
