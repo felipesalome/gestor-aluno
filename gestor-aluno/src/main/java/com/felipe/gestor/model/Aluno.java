@@ -5,6 +5,8 @@
  */
 package com.felipe.gestor.model;
 
+import java.util.List;
+
 /**
  *
  * @author felipe
@@ -13,7 +15,7 @@ public class Aluno {
     private int codigo;
     private String nome;
     
-    private Curso curso;
+    private List<Curso> curso;
     
     public Aluno() {}
     
@@ -49,17 +51,25 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public Curso getCurso() {
+    /**
+     * @return the list curso
+     */
+    public List<Curso> getCurso() {
         return curso;
     }
 
-    public void setCurso(Curso curso) {
+    /**
+     * @param curso the curso to set
+     */
+    public void setCurso(List<Curso> curso) {
         this.curso = curso;
     }
 
     @Override
     public String toString() {
-        return "{" + nome + '}';
+        return "Aluno{" + "codigo=" + codigo + ", nome=" + nome + '}';
     }
+
+    
     
 }
