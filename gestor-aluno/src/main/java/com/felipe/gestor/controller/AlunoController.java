@@ -105,6 +105,11 @@ public class AlunoController {
         }
     }
     
+    public void limpar() {
+        // Limpa os campos digitados
+        helper.limparTela();
+    }
+    
     public void apagar() {
         // Busca o codigo do Aluno selecionado na view
         int codigoAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
