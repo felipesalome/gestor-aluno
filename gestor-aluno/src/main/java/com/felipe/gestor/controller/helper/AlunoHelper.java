@@ -9,6 +9,8 @@ import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.view.TelaAluno;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,13 +31,13 @@ public class AlunoHelper {
         tableModel.setNumRows(0);
         
         // Percorre pela lista carregando a tabela linha por linha
-        for (Aluno aluno : alunos) {
+        alunos.forEach((aluno) -> {
             tableModel.addRow(new Object[]{
                 aluno.getCodigo(),
                 aluno.getNome(),
                 aluno.getCurso()
             });
-        }
+        });
     }
     
     public Aluno obterModelo() {
@@ -66,5 +68,17 @@ public class AlunoHelper {
     public void limparTela() {
         view.getjTextFieldAlunoNome().setText("");
         view.getjTextFieldCursoDescricao().setText("");
+    }
+    
+    public String limparSentenca(String inicial) {
+        String resultadoFinal = "";
+        String regex = "([\\w])+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher match = pattern.matcher(inicial);
+        while (match.find()) {
+            System.out.println(match.group());
+            resultadoFinal = match.group();
+        }
+        return resultadoFinal;
     }
 }
