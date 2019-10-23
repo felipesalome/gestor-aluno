@@ -62,7 +62,7 @@ public class AlunoHelper {
     
     public void setarModelo(Aluno modelo) {
         String nome = modelo.getNome();
-        String curso = limparSentenca(modelo.getCurso().toString());
+        String curso = criarLista(modelo.getCurso());
         
         view.getjTextFieldAlunoNome().setText(nome);
         view.getjTextFieldCursoDescricao().setText(curso);
@@ -77,12 +77,11 @@ public class AlunoHelper {
         String resultadoFinal = "";
         
         // Regex para remover caracteres não alfanuméricos
-        String regex = "([\\w])+";
+        String regex = "([\\w+])+";
         Pattern pattern = Pattern.compile(regex);
         Matcher match = pattern.matcher(inicial);
         
         while (match.find()) {
-            System.out.println(match.group());
             resultadoFinal = match.group();
         }
         

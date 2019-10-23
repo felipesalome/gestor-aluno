@@ -13,6 +13,7 @@ import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -53,12 +54,14 @@ public class AlunoController {
 
             // Se tiver preenchido o campo curso cria um curso novo e salva
             if (aluno.getCurso() != null) {
-
+                // Transformar a aluno.getCurso() em String depois em List
+                List<String> listaCursosAluno = Arrays.asList(aluno.getCurso().toString().split(","));
+                
                 // Percorre a lista de cursos para inserir individualmente
-                for (Curso curso : aluno.getCurso()) {
+                for (String curso : listaCursosAluno) {
                     
                     // Salva o curso criado no banco de dados e pega o id
-                    new CursoDAO().salvar(curso);
+                    new CursoDAO().salvar(new Curso(helper.limparSentenca(curso)));
                     int codigoCurso = new CursoDAO().buscarCodigo();
 
                     // Salva o relacionamento
