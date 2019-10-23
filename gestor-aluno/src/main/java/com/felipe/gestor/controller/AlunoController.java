@@ -10,6 +10,7 @@ import com.felipe.gestor.dao.AlunoDAO;
 import com.felipe.gestor.dao.CursoAlunoDAO;
 import com.felipe.gestor.dao.CursoDAO;
 import com.felipe.gestor.model.Aluno;
+import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
 import java.util.List;
@@ -53,13 +54,18 @@ public class AlunoController {
             // Se tiver preenchido o campo curso cria um curso novo e salva
             if (aluno.getCurso() != null) {
 
-                // Salva o curso criado no banco de dados e pega o id
-                new CursoDAO().salvar(aluno.getCurso());
-                int codigoCurso = new CursoDAO().buscarCodigo();
+                // Percorre a lista de cursos para inserir individualmente
+                for (Curso curso : aluno.getCurso()) {
+                    
+                    // Salva o curso criado no banco de dados e pega o id
+                    new CursoDAO().salvar(curso);
+                    int codigoCurso = new CursoDAO().buscarCodigo();
 
-                // Salva o relacionamento
-                CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
-                new CursoAlunoDAO().salvar(ca);
+                    // Salva o relacionamento
+                    CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
+                    new CursoAlunoDAO().salvar(ca);
+                }
+                
             }
 
             // Limpa os campos digitados
@@ -91,7 +97,7 @@ public class AlunoController {
                 if (aluno.getCurso() != null) {
 
                     // Salva o curso criado no banco de dados e pega o id
-                    new CursoDAO().salvar(aluno.getCurso());
+                    new CursoDAO().salvar((Curso)aluno.getCurso());
                     int codigoCurso = new CursoDAO().buscarCodigo();
 
                     // Salva o relacionamento

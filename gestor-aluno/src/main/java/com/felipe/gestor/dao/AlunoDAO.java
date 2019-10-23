@@ -131,7 +131,7 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
         return codigo;
     }
     
-    private Curso listarCursoPorAluno(Connection conn, int codigo) {
+    private List<Curso> listarCursoPorAluno(Connection conn, int codigo) {
         String sql =
                 "SELECT c.* " +
                 "FROM curso c, curso_aluno ca " +
@@ -139,21 +139,24 @@ public class AlunoDAO implements DataAccessObject<Aluno>{
                 "AND ca.codigo_curso = c.codigo";
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        Curso curso = new Curso();
+        List cursoList = new ArrayList();
+        Curso curso = null;
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
+                curso = new Curso();
                 curso.setCodigo(rs.getInt("codigo"));
                 curso.setDescricao(rs.getString("descricao"));
+                cursoList.add(curso);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             Conexao.close(null, pstm, rs);
         }
-        return curso;
+        return cursoList;
     }
     
     public Aluno buscarAluno(int codigo) {
