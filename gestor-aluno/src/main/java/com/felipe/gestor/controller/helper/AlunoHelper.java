@@ -85,7 +85,7 @@ public class AlunoHelper {
             resultadoFinal = match.group();
         }
         
-        // Retorna a sentena limpa
+        // Retorna a sentenca limpa
         return resultadoFinal;
     }
 
