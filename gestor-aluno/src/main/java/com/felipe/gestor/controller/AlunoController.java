@@ -94,19 +94,6 @@ public class AlunoController {
                 
                 // Salva o aluno criado no banco de dados e pega o id
                 new AlunoDAO().editar(aluno);
-                int codigoAluno = new AlunoDAO().buscarCodigo();
-                
-                // Se tiver preenchido o campo curso cria um curso novo e salva
-                if (aluno.getCurso() != null) {
-
-                    // Salva o curso criado no banco de dados e pega o id
-                    new CursoDAO().salvar((Curso)aluno.getCurso());
-                    int codigoCurso = new CursoDAO().buscarCodigo();
-
-                    // Salva o relacionamento
-                    CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
-                    new CursoAlunoDAO().salvar(ca);
-                }
 
                 // Limpa os campos digitados
                 helper.limparTela();
