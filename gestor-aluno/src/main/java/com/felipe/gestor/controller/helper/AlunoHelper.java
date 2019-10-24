@@ -90,16 +90,19 @@ public class AlunoHelper {
     }
 
     public String criarLista(List<Curso> cursosAluno) {
-        String cursos = "";
         
+        StringBuffer sbCursos = new StringBuffer();
+        
+        // Percorre a lista de cursos e cria uma string amigável
         for (Curso curso : cursosAluno) {
-            if (cursos.trim().isEmpty()) {
-                cursos = limparSentenca(curso.toString());
+            if (sbCursos.toString().trim().isEmpty()) {
+                sbCursos.append(limparSentenca(curso.toString()));
             } else {
-                cursos = cursos + ", " + limparSentenca(curso.toString());
+                sbCursos.append(", ");
+                sbCursos.append(limparSentenca(curso.toString()));
             }
         }
         
-        return cursos;
+        return sbCursos.toString();
     }
 }
