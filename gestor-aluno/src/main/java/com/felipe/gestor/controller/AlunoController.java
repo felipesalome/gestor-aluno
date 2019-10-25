@@ -13,6 +13,7 @@ import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
 import com.felipe.gestor.model.CursoAluno;
 import com.felipe.gestor.view.TelaAluno;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -133,5 +134,10 @@ public class AlunoController {
             // Envia pra view os dados do banco
             helper.setarModelo(aluno);
         }
+    }
+
+    List<Curso> adicionarCurso(List<Curso> cursosDoAluno) {
+        List<Curso> lista = new ArrayList();
+        return lista;
     }
 }
