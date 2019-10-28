@@ -67,7 +67,7 @@ public class TelaAluno extends javax.swing.JFrame {
         jTextFieldAlunoNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabelCurso.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jLabelCurso.setText("Curso");
+        jLabelCurso.setText("Cursos");
 
         jTextFieldCursoDescricao.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextFieldCursoDescricao.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +77,7 @@ public class TelaAluno extends javax.swing.JFrame {
         });
 
         jButtonAlunoSalvar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButtonAlunoSalvar.setText("Salvar");
+        jButtonAlunoSalvar.setText("Novo");
         jButtonAlunoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlunoSalvarActionPerformed(evt);
