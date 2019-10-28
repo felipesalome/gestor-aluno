@@ -5,9 +5,9 @@
  */
 package com.felipe.gestor.controller;
 
-import com.felipe.gestor.controller.helper.AlunoHelper;
 import com.felipe.gestor.model.Aluno;
 import com.felipe.gestor.model.Curso;
+import com.felipe.gestor.view.TelaAluno;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -24,7 +24,7 @@ import org.junit.Test;
 public class AlunoControllerTest {
     
     private AlunoController ac;
-    private AlunoHelper alunoHelper;
+    private TelaAluno telaAluno;
     
     public AlunoControllerTest() {
     }
@@ -46,11 +46,13 @@ public class AlunoControllerTest {
     }
 
     /**
-     * Test of selecionaCursosDoAluno method, of class AlunoController.
+     * Test of adicionarCurso method, of class AlunoController.
      */
     @Test
     public void itShouldBeAbleToAddCourseInAStudent() {
         System.out.println("itShouldBeAbleToAddCourseInAStudent");
+        
+        ac = new AlunoController(telaAluno);
         
         Aluno felipe = new Aluno("Felipe");
         felipe.setCodigo(1);
@@ -69,10 +71,10 @@ public class AlunoControllerTest {
         
         List<Curso> cursosDoFelipe = felipe.getCurso();
         
-        List<Curso> listaAtualizada = ac.adicionarCurso(cursosDoFelipe);
+        String listaAtualizada = ac.adicionarCurso(cursosDoFelipe);
         
         String expResult = "Inglês, Programação";
-        String result = alunoHelper.criarLista(listaAtualizada);
+        String result = listaAtualizada;
         
         assertEquals(expResult, result);
     }
