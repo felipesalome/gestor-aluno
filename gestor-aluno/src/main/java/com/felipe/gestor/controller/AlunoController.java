@@ -122,7 +122,12 @@ public class AlunoController {
             // Cria um objeto do tipo aluno para apagar no banco
             Aluno aluno = new Aluno();
             aluno.setCodigo(codigoAluno);
+            
+            // Apaga o registro do banco
             new AlunoDAO().apagar(aluno);
+            
+            // Limpa os campos preenchidos da tela
+            helper.limparTela();
         }
     }
 
@@ -143,6 +148,7 @@ public class AlunoController {
     }
 
     public String adicionarCurso(List<Curso> cursosDoAluno) {
+        
         return helper.criarLista(cursosDoAluno);
     }
 }
