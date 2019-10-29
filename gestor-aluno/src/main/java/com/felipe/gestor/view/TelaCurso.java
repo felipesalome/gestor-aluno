@@ -263,7 +263,9 @@ public class TelaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCursoApagarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
+        
+        this.cController.limpar();
+        
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**

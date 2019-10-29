@@ -73,7 +73,10 @@ public class CursoController {
             JOptionPane.showMessageDialog(null, "Favor selecionar o curso correto");
         } else {
             // Busca o codigo do Curso na view
-            int codigoExisteCurso = Integer.parseInt(view.getjTableCursos().getValueAt(view.getjTableCursos().getSelectedRow(), 0).toString());
+            int codigoExisteCurso =
+                    Integer.parseInt(view.getjTableCursos()
+                    .getValueAt(view.getjTableCursos().getSelectedRow(), 0)
+                    .toString());
             // Busca o curso com o codigo
             Curso existeCurso = new CursoDAO().buscarCurso(codigoExisteCurso);
             
@@ -85,19 +88,6 @@ public class CursoController {
                 
                 // Salva o curso criado no banco de dados e pega o id
                 new CursoDAO().editar(curso);
-                int codigoCurso = new CursoDAO().buscarCodigo();
-                
-                // Se tiver preenchido o campo curso cria um aluno novo e salva
-                if (curso.getAluno() != null) {
-
-                    // Salva o aluno criado no banco de dados e pega o id
-                    new AlunoDAO().salvar(curso.getAluno());
-                    int codigoAluno = new AlunoDAO().buscarCodigo();
-
-                    // Salva o relacionamento
-                    CursoAluno ca = new CursoAluno(codigoAluno, codigoCurso);
-                    new CursoAlunoDAO().salvar(ca);
-                }
 
                 // Limpa os campos digitados
                 helper.limparTela();
@@ -105,16 +95,29 @@ public class CursoController {
         }
     }
     
+    public void limpar() {
+        // Limpa os campos digitados
+        helper.limparTela();
+    }
+    
     public void apagar() {
         // Busca o codigo do Curso selecionado na view
-        int codigoCurso = Integer.parseInt(view.getjTableCursos().getValueAt(view.getjTableCursos().getSelectedRow(), 0).toString());
+        int codigoCurso =
+                Integer.parseInt(view.getjTableCursos()
+                .getValueAt(view.getjTableCursos().getSelectedRow(), 0)
+                .toString());
         
         // Verifica se o codigo é valido
         if (codigoCurso != 0) {
             // Cria um objeto do tipo curso para apagar no banco
             Curso curso = new Curso();
             curso.setCodigo(codigoCurso);
+            
+            // Apaga o registro do banco
             new CursoDAO().apagar(curso);
+            
+            // Limpa os campos preenchidos da tela
+            helper.limparTela();
         }
     }
     
