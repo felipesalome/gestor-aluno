@@ -53,7 +53,7 @@ public class AlunoControllerTest {
         System.out.println("itShouldBeAbleToAddCourseInAStudent");
         
         ac = new AlunoController(telaAluno);
-        
+
         Aluno felipe = new Aluno("Felipe");
         felipe.setCodigo(1);
         
