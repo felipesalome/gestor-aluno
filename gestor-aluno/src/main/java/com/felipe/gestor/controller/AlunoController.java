@@ -83,7 +83,10 @@ public class AlunoController {
             JOptionPane.showMessageDialog(null, "Favor selecionar o aluno correto");
         } else {
             // Busca o codigo do Aluno na view
-            int codigoExisteAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
+            int codigoExisteAluno =
+                    Integer.parseInt(view.getjTableAlunos()
+                    .getValueAt(view.getjTableAlunos().getSelectedRow(), 0)
+                    .toString());
             // Busca o aluno com o codigo
             Aluno existeAluno = new AlunoDAO().buscarAluno(codigoExisteAluno);
             
@@ -109,14 +112,22 @@ public class AlunoController {
     
     public void apagar() {
         // Busca o codigo do Aluno selecionado na view
-        int codigoAluno = Integer.parseInt(view.getjTableAlunos().getValueAt(view.getjTableAlunos().getSelectedRow(), 0).toString());
+        int codigoAluno =
+                Integer.parseInt(view.getjTableAlunos()
+                .getValueAt(view.getjTableAlunos().getSelectedRow(), 0)
+                .toString());
         
         // Verifica se o codigo é valido
         if (codigoAluno != 0) {
             // Cria um objeto do tipo aluno para apagar no banco
             Aluno aluno = new Aluno();
             aluno.setCodigo(codigoAluno);
+            
+            // Apaga o registro do banco
             new AlunoDAO().apagar(aluno);
+            
+            // Limpa os campos preenchidos da tela
+            helper.limparTela();
         }
     }
 
@@ -136,8 +147,8 @@ public class AlunoController {
         }
     }
 
-    List<Curso> adicionarCurso(List<Curso> cursosDoAluno) {
-        List<Curso> lista = new ArrayList();
-        return lista;
+    public String adicionarCurso(List<Curso> cursosDoAluno) {
+        
+        return helper.criarLista(cursosDoAluno);
     }
 }
