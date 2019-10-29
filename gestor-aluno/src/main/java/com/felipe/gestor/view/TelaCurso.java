@@ -50,6 +50,7 @@ public class TelaCurso extends javax.swing.JFrame {
         jTableCursos = new javax.swing.JTable();
         jButtonCursoEditar = new javax.swing.JButton();
         jButtonCursoApagar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("frameCurso"); // NOI18N
@@ -57,64 +58,33 @@ public class TelaCurso extends javax.swing.JFrame {
 
         jPanelFormularioCurso.setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar curso"));
 
+        jLabelCursoDescricao.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabelCursoDescricao.setText("Descrição");
 
+        jTextFieldCursoDescricao.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabelCursoEmenta.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabelCursoEmenta.setText("Ementa");
 
         jTextAreaCursoEmenta.setColumns(20);
+        jTextAreaCursoEmenta.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextAreaCursoEmenta.setRows(5);
         jScrollPane1.setViewportView(jTextAreaCursoEmenta);
 
-        jLabel1.setText("Aluno");
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel1.setText("Alunos");
 
-        jButtonCursoSalvar.setText("Salvar");
+        jTextFieldAlunoNome.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jButtonCursoSalvar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButtonCursoSalvar.setText("Novo");
         jButtonCursoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCursoSalvarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanelFormularioCursoLayout = new javax.swing.GroupLayout(jPanelFormularioCurso);
-        jPanelFormularioCurso.setLayout(jPanelFormularioCursoLayout);
-        jPanelFormularioCursoLayout.setHorizontalGroup(
-            jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCursoEmenta)
-                    .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
-                        .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCursoDescricao)
-                            .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jButtonCursoSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        jPanelFormularioCursoLayout.setVerticalGroup(
-            jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCursoDescricao)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
-                        .addComponent(jLabelCursoEmenta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonCursoSalvar))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-
+        jTableCursos.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTableCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -165,40 +135,89 @@ public class TelaCurso extends javax.swing.JFrame {
             }
         });
 
+        jButtonLimpar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelFormularioCursoLayout = new javax.swing.GroupLayout(jPanelFormularioCurso);
+        jPanelFormularioCurso.setLayout(jPanelFormularioCursoLayout);
+        jPanelFormularioCursoLayout.setHorizontalGroup(
+            jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
+                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelCursoDescricao)
+                            .addComponent(jLabelCursoEmenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jButtonCursoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCursoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCursoApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFormularioCursoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(299, 299, 299)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanelFormularioCursoLayout.setVerticalGroup(
+            jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFormularioCursoLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCursoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCursoDescricao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCursoEmenta)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(jPanelFormularioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButtonLimpar)
+                    .addComponent(jButtonCursoEditar)
+                    .addComponent(jButtonCursoSalvar)
+                    .addComponent(jButtonCursoApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanelFormularioCursoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonCursoApagar, jButtonCursoEditar, jButtonCursoSalvar, jButtonLimpar});
+
         javax.swing.GroupLayout jPanelCursoConteudoLayout = new javax.swing.GroupLayout(jPanelCursoConteudo);
         jPanelCursoConteudo.setLayout(jPanelCursoConteudoLayout);
         jPanelCursoConteudoLayout.setHorizontalGroup(
             jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCursoConteudoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCursoEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCursoApagar, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                .addComponent(jPanelFormularioCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelCursoConteudoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanelFormularioCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jPanelCursoConteudoLayout.setVerticalGroup(
             jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCursoConteudoLayout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
-                .addGroup(jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCursoConteudoLayout.createSequentialGroup()
-                        .addComponent(jButtonCursoEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCursoApagar)))
+            .addGroup(jPanelCursoConteudoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelFormularioCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanelCursoConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelCursoConteudoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanelFormularioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(357, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,6 +262,10 @@ public class TelaCurso extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCursoApagarActionPerformed
 
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,6 +303,7 @@ public class TelaCurso extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCursoApagar;
     private javax.swing.JButton jButtonCursoEditar;
     private javax.swing.JButton jButtonCursoSalvar;
+    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCursoDescricao;
     private javax.swing.JLabel jLabelCursoEmenta;
