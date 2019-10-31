@@ -93,11 +93,11 @@ public class TelaCurso extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "codigo", "descricao", "ementa", "aluno"
+                "codigo", "descricao", "ementa", "alunos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -118,6 +118,14 @@ public class TelaCurso extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTableCursos);
+        if (jTableCursos.getColumnModel().getColumnCount() > 0) {
+            jTableCursos.getColumnModel().getColumn(0).setMinWidth(50);
+            jTableCursos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTableCursos.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableCursos.getColumnModel().getColumn(3).setMinWidth(50);
+            jTableCursos.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTableCursos.getColumnModel().getColumn(3).setMaxWidth(80);
+        }
 
         jButtonCursoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButtonCursoEditar.setText("Editar");

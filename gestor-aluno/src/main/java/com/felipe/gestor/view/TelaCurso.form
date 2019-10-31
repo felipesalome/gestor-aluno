@@ -223,12 +223,12 @@
                         <Column editable="false" title="codigo" type="java.lang.Integer"/>
                         <Column editable="false" title="descricao" type="java.lang.String"/>
                         <Column editable="false" title="ementa" type="java.lang.String"/>
-                        <Column editable="false" title="aluno" type="java.lang.Object"/>
+                        <Column editable="false" title="alunos" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="80" minWidth="50" prefWidth="50" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -243,7 +243,7 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="80" minWidth="50" prefWidth="50" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
