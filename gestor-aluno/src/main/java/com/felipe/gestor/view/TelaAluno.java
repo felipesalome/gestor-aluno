@@ -87,17 +87,14 @@ public class TelaAluno extends javax.swing.JFrame {
         jTableAlunos.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTableAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "codigo", "nome", "curso"
+                "codigo", "nome", "cursos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -119,7 +116,12 @@ public class TelaAluno extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAlunos);
         if (jTableAlunos.getColumnModel().getColumnCount() > 0) {
-            jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTableAlunos.getColumnModel().getColumn(0).setMinWidth(50);
+            jTableAlunos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTableAlunos.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableAlunos.getColumnModel().getColumn(1).setMinWidth(300);
+            jTableAlunos.getColumnModel().getColumn(1).setPreferredWidth(300);
+            jTableAlunos.getColumnModel().getColumn(1).setMaxWidth(350);
         }
 
         jButtonAlunoEditar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
